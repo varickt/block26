@@ -1,11 +1,21 @@
-import './App.css';
+// src/App.jsx
+import React, { useState } from 'react';
+import ContactList from './components/ContactList';
+import SelectedContact from './components/SelectedContact';
 
-function App() {
+export default function App() {
+  const [selectedContactId, setSelectedContactId] = useState(null);
+  const [contacts, setContacts] = useState([]);
+
+  const selectedContact = contacts.find(contact => contact.id === selectedContactId);
+
   return (
-    <div className="App">
-      {/* Add your content here */}
-    </div>
+    <>
+      {selectedContactId ? (
+        <SelectedContact selectedContactId={selectedContactId} setSelectedContactId={setSelectedContactId} />
+      ) : (
+        <ContactList setSelectedContactId={setSelectedContactId} setContacts={setContacts} />
+      )}
+    </>
   );
 }
-
-export default App;
